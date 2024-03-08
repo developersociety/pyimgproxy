@@ -1,0 +1,59 @@
+[project]
+name = 'pyimgproxy'
+version = '0.0'
+description = 'Python client for imgproxy'
+readme = 'README.md'
+maintainers = [{ name = 'The Developer Society', email = 'studio@dev.ngo' }]
+requires-python = '>= 3.8'
+classifiers = [
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: BSD License',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+]
+
+[project.urls]
+Homepage = "https://github.com/developersociety/pyimgproxy"
+
+[build-system]
+requires = ['setuptools >= 61.0']
+build-backend = 'setuptools.build_meta'
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.packages.find]
+include = ['pyimgproxy*']
+
+[tool.ruff]
+line-length = 99
+target-version = 'py38'
+
+[tool.ruff.lint]
+select = [
+    'F',   # pyflakes
+    'E',   # pycodestyle
+    'W',   # pycodestyle
+    'I',   # isort
+    'N',   # pep8-naming
+    'UP',  # pyupgrade
+    'S',   # flake8-bandit
+    'BLE', # flake8-blind-except
+    'C4',  # flake8-comprehensions
+    'EM',  # flake8-errmsg
+    'T20', # flake8-print
+    'RET', # flake8-return
+    'RUF', # ruff
+]
+ignore = [
+    'EM101', # flake8-errmsg: raw-string-in-exception
+]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
