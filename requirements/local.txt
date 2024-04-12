@@ -1,5 +1,5 @@
 -r testing.txt
 
-bump-my-version==0.19.3
+bump-my-version==0.20.0
 tox==4.14.2
 tox-uv==1.7.0
