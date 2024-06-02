@@ -28,8 +28,14 @@ class Image:
         new_image.options = self.options.copy()
         return new_image
 
-    def _add_option(self, *args: Any) -> "Image":
-        option_list = list(args)
+    def add_option(self, option_name: str, *args: Any) -> "Image":
+        """
+        Add an image processing option, returning a new Image.
+
+        This method is used internally by all other image processing methods, but can also be used
+        to add options directly.
+        """
+        option_list = [option_name, *args]
         # Remove any trailing None values
         while option_list and option_list[-1] is None:
             option_list.pop()
@@ -56,7 +62,7 @@ class Image:
         This is a meta-option that defines the resizing type, width, height, enlarge, and extend.
         All arguments are optional and can be omitted to use their default values.
         """
-        return self._add_option(
+        return self.add_option(
             "resize",
             resizing_type,
             width,
@@ -82,7 +88,7 @@ class Image:
         This is a meta-option that defines the width, height, enlarge, and extend. All arguments
         are optional and can be omitted to use their default values.
         """
-        return self._add_option(
+        return self.add_option(
             "size", width, height, enlarge, extend, gravity_type, x_offset, y_offset
         )
 
@@ -101,7 +107,7 @@ class Image:
 
         Default: `fit`
         """
-        return self._add_option("resizing_type", resizing_type)
+        return self.add_option("resizing_type", resizing_type)
 
     def resizing_algorithm(self, resizing_algorithm: str) -> "Image":
         """
@@ -110,7 +116,7 @@ class Image:
 
         Default: `lanczos3`
         """
-        return self._add_option("resizing_algorithm", resizing_algorithm)
+        return self.add_option("resizing_algorithm", resizing_algorithm)
 
     def width(self, width: int) -> "Image":
         """
@@ -120,7 +126,7 @@ class Image:
 
         Default: `0`
         """
-        return self._add_option("width", width)
+        return self.add_option("width", width)
 
     def height(self, height: int) -> "Image":
         """
@@ -130,7 +136,7 @@ class Image:
 
         Default: `0`
         """
-        return self._add_option("height", height)
+        return self.add_option("height", height)
 
     def min_width(self, width: int) -> "Image":
         """
@@ -141,7 +147,7 @@ class Image:
 
         Default: `0`
         """
-        return self._add_option("min-width", width)
+        return self.add_option("min-width", width)
 
     def min_height(self, height: int) -> "Image":
         """
@@ -152,7 +158,7 @@ class Image:
 
         Default: `0`
         """
-        return self._add_option("min-height", height)
+        return self.add_option("min-height", height)
 
     def zoom(self, x: Union[int, float], y: Optional[Union[int, float]] = None) -> "Image":
         """
@@ -167,7 +173,7 @@ class Image:
 
         Default: `1`
         """
-        return self._add_option("zoom", x, y)
+        return self.add_option("zoom", x, y)
 
     def dpr(self, dpr: Union[int, float]) -> "Image":
         """
@@ -179,7 +185,7 @@ class Image:
 
         Default: `1`
         """
-        return self._add_option("dpr", dpr)
+        return self.add_option("dpr", dpr)
 
     def enlarge(self, enlarge: bool = False) -> "Image":
         """
@@ -187,7 +193,7 @@ class Image:
 
         Default: `False`
         """
-        return self._add_option("enlarge", enlarge)
+        return self.add_option("enlarge", enlarge)
 
     def extend(
         self,
@@ -204,7 +210,7 @@ class Image:
 
         Default: `false:ce:0:0`
         """
-        return self._add_option("extend", extend, gravity_type, x_offset, y_offset)
+        return self.add_option("extend", extend, gravity_type, x_offset, y_offset)
 
     def extend_aspect_ratio(
         self,
@@ -221,7 +227,7 @@ class Image:
 
         Default: `false:ce:0:0`
         """
-        return self._add_option("extend_aspect_ratio", extend, gravity_type, x_offset, y_offset)
+        return self.add_option("extend_aspect_ratio", extend, gravity_type, x_offset, y_offset)
 
     def gravity(
         self,
@@ -250,7 +256,7 @@ class Image:
 
         Default: `ce:0:0`
         """
-        return self._add_option("gravity", gravity_type, x_offset, y_offset)
+        return self.add_option("gravity", gravity_type, x_offset, y_offset)
 
     def crop(
         self,
@@ -272,7 +278,7 @@ class Image:
         - `gravity_type` (optional) accepts the same values as the gravity option. When
           `gravity_type` is not set, imgproxy will use the value of the gravity option.
         """
-        return self._add_option("crop", width, height, gravity_type, x_offset, y_offset)
+        return self.add_option("crop", width, height, gravity_type, x_offset, y_offset)
 
     def trim(
         self,
@@ -292,7 +298,7 @@ class Image:
           if objects on your images are centered but have non-symmetrical shadow.
         - `equal_ver` - (optional) acts like `equal_hor` but for top/bottom sides.
         """
-        return self._add_option("trim", threshold, color, equal_hor, equal_ver)
+        return self.add_option("trim", threshold, color, equal_hor, equal_ver)
 
     def padding(
         self,
@@ -310,7 +316,7 @@ class Image:
             bottom - bottom padding
             left - left padding
         """
-        return self._add_option("padding", top, right, bottom, left)
+        return self.add_option("padding", top, right, bottom, left)
 
     def auto_rotate(self, auto_rotate: bool) -> "Image":
         """
@@ -320,7 +326,7 @@ class Image:
         configuration but this procesing option allows the configuration to be set for each
         request.
         """
-        return self._add_option("auto_rotate", auto_rotate)
+        return self.add_option("auto_rotate", auto_rotate)
 
     def rotate(self, angle: int) -> "Image":
         """
@@ -331,7 +337,7 @@ class Image:
 
         Default: `0`
         """
-        return self._add_option("rotate", angle)
+        return self.add_option("rotate", angle)
 
     @overload
     def background(self, *, hex_color: str) -> "Image": ...
@@ -356,9 +362,9 @@ class Image:
         Default: disabled
         """
         if hex_color is not None:
-            return self._add_option("background", hex_color)
+            return self.add_option("background", hex_color)
 
-        return self._add_option("background", red, green, blue)
+        return self.add_option("background", red, green, blue)
 
     def background_alpha(self, alpha: Union[int, float]) -> "Image":
         """
@@ -367,7 +373,7 @@ class Image:
 
         Default: `1`
         """
-        return self._add_option("background_alpha", alpha)
+        return self.add_option("background_alpha", alpha)
 
     def adjust(
         self,
@@ -379,7 +385,7 @@ class Image:
         This is a meta-option that defines the brightness, contrast, and saturation. All arguments
         are optional and can be omitted to use their default values.
         """
-        return self._add_option("adjust", brightness, contrast, saturation)
+        return self.add_option("adjust", brightness, contrast, saturation)
 
     def brightness(self, brightness: int) -> "Image":
         """
@@ -388,7 +394,7 @@ class Image:
 
         Default: `0`
         """
-        return self._add_option("brightness", brightness)
+        return self.add_option("brightness", brightness)
 
     def contrast(self, contrast: Union[int, float]) -> "Image":
         """
@@ -397,7 +403,7 @@ class Image:
 
         Default: `1`
         """
-        return self._add_option("contrast", contrast)
+        return self.add_option("contrast", contrast)
 
     def saturation(self, saturation: Union[int, float]) -> "Image":
         """
@@ -406,7 +412,7 @@ class Image:
 
         Default: `1`
         """
-        return self._add_option("saturation", saturation)
+        return self.add_option("saturation", saturation)
 
     def blur(self, sigma: Union[int, float]) -> "Image":
         """
@@ -415,7 +421,7 @@ class Image:
 
         Default: disabled
         """
-        return self._add_option("blur", sigma)
+        return self.add_option("blur", sigma)
 
     def sharpen(self, sigma: Union[int, float]) -> "Image":
         """
@@ -427,7 +433,7 @@ class Image:
 
         Default: disabled
         """
-        return self._add_option("sharpen", sigma)
+        return self.add_option("sharpen", sigma)
 
     def pixelate(self, size: int) -> "Image":
         """
@@ -436,7 +442,7 @@ class Image:
 
         Default: disabled
         """
-        return self._add_option("pixelate", size)
+        return self.add_option("pixelate", size)
 
     def unsharp_masking(
         self,
@@ -448,7 +454,7 @@ class Image:
         Allows redefining unsharp masking options. All arguments have the same meaning as Unsharp
         masking configs. All arguments are optional and can be omitted.
         """
-        return self._add_option("unsharp_masking", mode, weight, divider)
+        return self.add_option("unsharp_masking", mode, weight, divider)
 
     def blur_detections(
         self, sigma: Union[int, float], class_names: Optional[List[str]] = None
@@ -461,7 +467,7 @@ class Image:
         """
         if class_names is None:
             class_names = []
-        return self._add_option("blur_detections", sigma, *class_names)
+        return self.add_option("blur_detections", sigma, *class_names)
 
     def draw_detections(self, draw: bool, class_names: Optional[List[str]] = None) -> "Image":
         """
@@ -471,7 +477,7 @@ class Image:
         """
         if class_names is None:
             class_names = []
-        return self._add_option("draw_detections", draw, *class_names)
+        return self.add_option("draw_detections", draw, *class_names)
 
     def gradient(self) -> "Image":
         raise NotImplementedError
@@ -536,7 +542,7 @@ class Image:
 
         Default: `jpg`
         """
-        return self._add_option("format", extension)
+        return self.add_option("format", extension)
 
     def page(self, page: int) -> "Image":
         """
@@ -549,7 +555,7 @@ class Image:
 
         Default: `0`
         """
-        return self._add_option("page", page)
+        return self.add_option("page", page)
 
     def pages(self, pages: int) -> "Image":
         """
@@ -563,7 +569,7 @@ class Image:
 
         Default: `1`
         """
-        return self._add_option("pages", pages)
+        return self.add_option("pages", pages)
 
     def disable_animation(self, disable: bool) -> "Image":
         """
@@ -573,7 +579,7 @@ class Image:
         Default: `False`
         """
 
-        return self._add_option("disable_animation", disable)
+        return self.add_option("disable_animation", disable)
 
     def video_thumbnail_second(self) -> "Image":
         raise NotImplementedError
@@ -605,7 +611,7 @@ class Image:
 
         Default: `False`
         """
-        return self._add_option("raw", raw)
+        return self.add_option("raw", raw)
 
     def cachebuster(self) -> "Image":
         raise NotImplementedError

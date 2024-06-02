@@ -20,7 +20,7 @@ class ImageProcessingTestCase(TestCase):
         self.assertEqual(image._source_url, "another_image.png")
 
     def test_add_option(self):
-        image = self.image._add_option("demo", 1, None, 2, None, 3, None)
+        image = self.image.add_option("demo", 1, None, 2, None, 3, None)
 
         self.assertNotEqual(id(self.image), id(image))
         self.assertEqual(image.options, ["demo:1::2::3"])
