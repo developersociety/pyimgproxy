@@ -500,23 +500,52 @@ class Image:
     def style(self) -> "Image":
         raise NotImplementedError
 
-    def strip_metadata(self) -> "Image":
-        raise NotImplementedError
+    def strip_metadata(self, strip_metadata: bool = False) -> "Image":
+        """
+        When set to `True`, imgproxy will strip the metadata (EXIF, IPTC, etc.) on JPEG and WebP
+        output images. This is normally controlled by the `IMGPROXY_STRIP_METADATA` configuration
+        but this processing option allows the configuration to be set for each request.
+        """
+        return self.add_option("strip_metadata", strip_metadata)
 
-    def keep_copyright(self) -> "Image":
-        raise NotImplementedError
+    def keep_copyright(self, keep_copyright: bool = False) -> "Image":
+        """
+        When set to `True`, imgproxy will not remove copyright info while stripping metadata. This
+        is normally controlled by the `IMGPROXY_KEEP_COPYRIGHT` configuration but this processing
+        option allows the configuration to be set for each request.
+        """
+        return self.add_option("keep_copyright", keep_copyright)
 
     def dpi(self) -> "Image":
         raise NotImplementedError
 
-    def strip_color_profile(self) -> "Image":
-        raise NotImplementedError
+    def strip_color_profile(self, strip_color_profile: bool = False) -> "Image":
+        """
+        When set to `True`, imgproxy will transform the embedded color profile (ICC) to sRGB and
+        remove it from the image. Otherwise, imgproxy will try to keep it as is. This is normally
+        controlled by the `IMGPROXY_STRIP_COLOR_PROFILE` configuration but this processing option
+        allows the configuration to be set for each request.
+        """
+        return self.add_option("strip_color_profile", strip_color_profile)
 
-    def enforce_thumbnail(self) -> "Image":
-        raise NotImplementedError
+    def enforce_thumbnail(self, enforce_thumbnail: bool = False) -> "Image":
+        """
+        When set to `True` and the source image has an embedded thumbnail, imgproxy will always
+        use the embedded thumbnail instead of the main image. Currently, only thumbnails embedded
+        in heic and avif are supported. This is normally controlled by the
+        `IMGPROXY_ENFORCE_THUMBNAIL` configuration but this processing option allows the
+        configuration to be set for each request.
+        """
+        return self.add_option("enforce_thumbnail", enforce_thumbnail)
 
-    def quality(self) -> "Image":
-        raise NotImplementedError
+    def quality(self, quality: int) -> "Image":
+        """
+        Redefines quality of the resulting image, as a percentage. When set to `0`, quality is
+        assumed based on `IMGPROXY_QUALITY` and `format_quality`.
+
+        Default: `0`
+        """
+        return self.add_option("quality", quality)
 
     def format_quality(self) -> "Image":
         raise NotImplementedError
@@ -578,7 +607,6 @@ class Image:
 
         Default: `False`
         """
-
         return self.add_option("disable_animation", disable)
 
     def video_thumbnail_second(self) -> "Image":
@@ -613,8 +641,18 @@ class Image:
         """
         return self.add_option("raw", raw)
 
-    def cachebuster(self) -> "Image":
-        raise NotImplementedError
+    def cachebuster(self, string: str) -> "Image":
+        """
+        Cache buster doesn't affect image processing but its changing allows for bypassing the
+        CDN, proxy server and browser cache. Useful when you have changed some things that are not
+        reflected in the URL, like image quality settings, presets, or watermark data.
+
+        It's highly recommended to prefer the `cachebuster` option over a URL query string because
+        that option can be properly signed.
+
+        Default: empty
+        """
+        return self.add_option("cachebuster", string)
 
     def expires(self) -> "Image":
         raise NotImplementedError
@@ -622,8 +660,14 @@ class Image:
     def filename(self) -> "Image":
         raise NotImplementedError
 
-    def return_attachment(self) -> "Image":
-        raise NotImplementedError
+    def return_attachment(self, return_attachment: bool) -> "Image":
+        """
+        When set to `True`, imgproxy will return `attachment` in the `Content-Disposition` header,
+        and the browser will open a 'Save as' dialog. This is normally controlled by the
+        `IMGPROXY_RETURN_ATTACHMENT` configuration but this processing option allows the
+        configuration to be set for each request.
+        """
+        return self.add_option("return_attachment", return_attachment)
 
     def preset(self) -> "Image":
         raise NotImplementedError
@@ -631,17 +675,41 @@ class Image:
     def hashsum(self) -> "Image":
         raise NotImplementedError
 
-    def max_src_resolution(self) -> "Image":
-        raise NotImplementedError
+    def max_src_resolution(self, resolution: int) -> "Image":
+        """
+        Allows redefining `IMGPROXY_MAX_SRC_RESOLUTION` config.
 
-    def max_src_file_size(self) -> "Image":
-        raise NotImplementedError
+        Since this option allows redefining a security restriction, its usage is not allowed
+        unless the `IMGPROXY_ALLOW_SECURITY_OPTIONS` config is set to true.
+        """
+        return self.add_option("max_src_resolution", resolution)
 
-    def max_animation_frames(self) -> "Image":
-        raise NotImplementedError
+    def max_src_file_size(self, size: int) -> "Image":
+        """
+        Allows redefining `IMGPROXY_MAX_SRC_FILE_SIZE` config.
 
-    def max_animation_frame_resolution(self) -> "Image":
-        raise NotImplementedError
+        Since this option allows redefining a security restriction, its usage is not allowed
+        unless the `IMGPROXY_ALLOW_SECURITY_OPTIONS` config is set to true.
+        """
+        return self.add_option("max_src_file_size", size)
+
+    def max_animation_frames(self, size: int) -> "Image":
+        """
+        Allows redefining `IMGPROXY_MAX_ANIMATION_FRAMES` config.
+
+        Since this option allows redefining a security restriction, its usage is not allowed
+        unless the `IMGPROXY_ALLOW_SECURITY_OPTIONS` config is set to true.
+        """
+        return self.add_option("max_animation_frames", size)
+
+    def max_animation_frame_resolution(self, size: int) -> "Image":
+        """
+        Allows redefining `IMGPROXY_MAX_ANIMATION_FRAME_RESOLUTION` config.
+
+        Since this option allows redefining a security restriction, its usage is not allowed
+        unless the `IMGPROXY_ALLOW_SECURITY_OPTIONS` config is set to true.
+        """
+        return self.add_option("max_animation_frame_resolution", size)
 
     def _source_url_needs_encoding(self) -> bool:
         """

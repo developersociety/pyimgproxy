@@ -242,6 +242,81 @@ class ImageProcessingTestCase(TestCase):
 
         self.assertEqual(image.options, ["draw_detections:True"])
 
+    def test_strip_metadata(self):
+        image = self.image.strip_metadata(strip_metadata=True)
+
+        self.assertEqual(image.options, ["strip_metadata:True"])
+
+    def test_keep_copyright(self):
+        image = self.image.keep_copyright(keep_copyright=True)
+
+        self.assertEqual(image.options, ["keep_copyright:True"])
+
+    def test_strip_color_profile(self):
+        image = self.image.strip_color_profile(strip_color_profile=True)
+
+        self.assertEqual(image.options, ["strip_color_profile:True"])
+
+    def test_enforce_thumbnail(self):
+        image = self.image.enforce_thumbnail(enforce_thumbnail=True)
+
+        self.assertEqual(image.options, ["enforce_thumbnail:True"])
+
+    def test_quality(self):
+        image = self.image.quality(quality=50)
+
+        self.assertEqual(image.options, ["quality:50"])
+
+    def test_format(self):
+        image = self.image.format(extension="png")
+
+        self.assertEqual(image.options, ["format:png"])
+
+    def test_page(self):
+        image = self.image.page(page=3)
+
+        self.assertEqual(image.options, ["page:3"])
+
+    def test_disable_animation(self):
+        image = self.image.disable_animation(disable=True)
+
+        self.assertEqual(image.options, ["disable_animation:True"])
+
+    def test_raw(self):
+        image = self.image.raw(raw=True)
+
+        self.assertEqual(image.options, ["raw:True"])
+
+    def test_cachebuster(self):
+        image = self.image.cachebuster(string="cache_bypass")
+
+        self.assertEqual(image.options, ["cachebuster:cache_bypass"])
+
+    def test_return_attachment(self):
+        image = self.image.return_attachment(return_attachment=True)
+
+        self.assertEqual(image.options, ["return_attachment:True"])
+
+    def test_max_src_resolution(self):
+        image = self.image.max_src_resolution(resolution=60)
+
+        self.assertEqual(image.options, ["max_src_resolution:60"])
+
+    def test_max_src_file_size(self):
+        image = self.image.max_src_file_size(size=1000000)
+
+        self.assertEqual(image.options, ["max_src_file_size:1000000"])
+
+    def test_max_animation_frames(self):
+        image = self.image.max_animation_frames(size=3)
+
+        self.assertEqual(image.options, ["max_animation_frames:3"])
+
+    def test_max_animation_frame_resolution(self):
+        image = self.image.max_animation_frame_resolution(size=4)
+
+        self.assertEqual(image.options, ["max_animation_frame_resolution:4"])
+
 
 class ImageTestCase(TestCase):
     def test_repr(self):
