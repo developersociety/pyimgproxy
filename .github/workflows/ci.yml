@@ -6,7 +6,7 @@ concurrency:
 jobs:
   matrix:
     name: Build test matrix
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,7 +28,7 @@ jobs:
 
   test:
     name: Test -- ${{ matrix.tox_env }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: matrix
     strategy:
       matrix:
@@ -58,7 +58,7 @@ jobs:
 
   coverage:
     name: Coverage
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: test
     if: always()
     steps:

@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build packages
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     environment: publish
 
     steps:
@@ -33,7 +33,7 @@ jobs:
     name: Publish package on PyPI
     needs:
       - build
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     environment:
       name: pypi
       url: https://pypi.org/project/${{ github.event.repository.name }}/${{ github.ref_name }}/
@@ -53,7 +53,7 @@ jobs:
     name: Publish package on GitHub Releases
     needs:
       - build
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     environment:
       name: github-releases
       url: ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ github.ref_name }}
