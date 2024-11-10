@@ -3,7 +3,7 @@ import hashlib
 import hmac
 import re
 from functools import cached_property
-from typing import TYPE_CHECKING, Any, List, Optional, Union, overload
+from typing import TYPE_CHECKING, Any, Optional, Union, overload
 
 if TYPE_CHECKING:
     from .imgproxy import ImgProxy
@@ -15,7 +15,7 @@ class Image:
     def __init__(self, imgproxy: "ImgProxy", source_url: str) -> None:
         self.imgproxy = imgproxy
         self._source_url = source_url
-        self.options: List[str] = []
+        self.options: list[str] = []
 
     def __repr__(self) -> str:
         return f"<Image {self._source_url}>"
@@ -457,7 +457,7 @@ class Image:
         return self.add_option("unsharp_masking", mode, weight, divider)
 
     def blur_detections(
-        self, sigma: Union[int, float], class_names: Optional[List[str]] = None
+        self, sigma: Union[int, float], class_names: Optional[list[str]] = None
     ) -> "Image":
         """
         imgproxy detects objects of the provided classes and blurs them. If class names are
@@ -469,7 +469,7 @@ class Image:
             class_names = []
         return self.add_option("blur_detections", sigma, *class_names)
 
-    def draw_detections(self, draw: bool, class_names: Optional[List[str]] = None) -> "Image":
+    def draw_detections(self, draw: bool, class_names: Optional[list[str]] = None) -> "Image":
         """
         When draw is set to `True`, imgproxy detects objects of the provided classes and draws
         their bounding boxes. If class names are omitted, imgproxy draws the bounding boxes of all
