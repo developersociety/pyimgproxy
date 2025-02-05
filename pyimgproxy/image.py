@@ -747,6 +747,6 @@ class Image:
             full_path = (b"/" + signature + unsigned_path).decode()
         else:
             # No signature checking - the signature part may contain anything
-            full_path = (options_path_bytes + image_path).decode()
+            full_path = (b"/_" + options_path_bytes + image_path).decode()
 
         return f"{self.imgproxy.url}{full_path}"

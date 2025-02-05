@@ -383,5 +383,5 @@ class ImageTestCase(TestCase):
 
         self.assertEqual(
             image.url,
-            "https://example.org/thumbnail/size:640:480/plain/demo.png",
+            "https://example.org/thumbnail/_/size:640:480/plain/demo.png",
         )
