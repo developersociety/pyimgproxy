@@ -735,7 +735,7 @@ class Image:
         else:
             image_path = f"/plain/{self._source_url}".encode()
 
-        if self.imgproxy.key and self.imgproxy.salt and True:
+        if self.imgproxy.key and self.imgproxy.salt:
             unsigned_path = options_path_bytes + image_path
             digest = hmac.new(
                 key=self.imgproxy.key,
