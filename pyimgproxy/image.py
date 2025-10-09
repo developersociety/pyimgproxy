@@ -3,7 +3,7 @@ import hashlib
 import hmac
 import re
 from functools import cached_property
-from typing import TYPE_CHECKING, Any, Optional, Union, overload
+from typing import TYPE_CHECKING, Any, overload
 
 if TYPE_CHECKING:
     from .imgproxy import ImgProxy
@@ -49,14 +49,14 @@ class Image:
 
     def resize(
         self,
-        resizing_type: Optional[str] = None,
-        width: Optional[int] = None,
-        height: Optional[int] = None,
-        enlarge: Optional[bool] = None,
-        extend: Optional[bool] = None,
-        gravity_type: Optional[str] = None,
-        x_offset: Optional[Union[int, float]] = None,
-        y_offset: Optional[Union[int, float]] = None,
+        resizing_type: str | None = None,
+        width: int | None = None,
+        height: int | None = None,
+        enlarge: bool | None = None,
+        extend: bool | None = None,
+        gravity_type: str | None = None,
+        x_offset: int | float | None = None,
+        y_offset: int | float | None = None,
     ) -> "Image":
         """
         This is a meta-option that defines the resizing type, width, height, enlarge, and extend.
@@ -76,13 +76,13 @@ class Image:
 
     def size(
         self,
-        width: Optional[int] = None,
-        height: Optional[int] = None,
-        enlarge: Optional[bool] = None,
-        extend: Optional[bool] = None,
-        gravity_type: Optional[str] = None,
-        x_offset: Optional[Union[int, float]] = None,
-        y_offset: Optional[Union[int, float]] = None,
+        width: int | None = None,
+        height: int | None = None,
+        enlarge: bool | None = None,
+        extend: bool | None = None,
+        gravity_type: str | None = None,
+        x_offset: int | float | None = None,
+        y_offset: int | float | None = None,
     ) -> "Image":
         """
         This is a meta-option that defines the width, height, enlarge, and extend. All arguments
@@ -160,7 +160,7 @@ class Image:
         """
         return self.add_option("min-height", height)
 
-    def zoom(self, x: Union[int, float], y: Optional[Union[int, float]] = None) -> "Image":
+    def zoom(self, x: int | float, y: int | float | None = None) -> "Image":
         """
         When set, imgproxy will multiply the image dimensions according to these factors. The
         values must be greater than 0.
@@ -175,7 +175,7 @@ class Image:
         """
         return self.add_option("zoom", x, y)
 
-    def dpr(self, dpr: Union[int, float]) -> "Image":
+    def dpr(self, dpr: int | float) -> "Image":
         """
         When set, imgproxy will multiply the image dimensions according to this factor for HiDPI
         (Retina) devices. The value must be greater than 0.
@@ -197,10 +197,10 @@ class Image:
 
     def extend(
         self,
-        extend: Optional[bool] = None,
-        gravity_type: Optional[str] = None,
-        x_offset: Optional[Union[int, float]] = None,
-        y_offset: Optional[Union[int, float]] = None,
+        extend: bool | None = None,
+        gravity_type: str | None = None,
+        x_offset: int | float | None = None,
+        y_offset: int | float | None = None,
     ) -> "Image":
         """
         - When extend is set to `True`, imgproxy will extend the image if it is smaller than the
@@ -214,10 +214,10 @@ class Image:
 
     def extend_aspect_ratio(
         self,
-        extend: Optional[bool] = None,
-        gravity_type: Optional[str] = None,
-        x_offset: Optional[Union[int, float]] = None,
-        y_offset: Optional[Union[int, float]] = None,
+        extend: bool | None = None,
+        gravity_type: str | None = None,
+        x_offset: int | float | None = None,
+        y_offset: int | float | None = None,
     ) -> "Image":
         """
         - When extend is set to `True`, imgproxy will extend the image to the requested aspect
@@ -231,9 +231,9 @@ class Image:
 
     def gravity(
         self,
-        gravity_type: Optional[str] = None,
-        x_offset: Optional[Union[int, float]] = None,
-        y_offset: Optional[Union[int, float]] = None,
+        gravity_type: str | None = None,
+        x_offset: int | float | None = None,
+        y_offset: int | float | None = None,
     ) -> "Image":
         """
         When imgproxy needs to cut some parts of the image, it is guided by the gravity option.
@@ -260,11 +260,11 @@ class Image:
 
     def crop(
         self,
-        width: Optional[Union[int, float]] = None,
-        height: Optional[Union[int, float]] = None,
-        gravity_type: Optional[str] = None,
-        x_offset: Optional[Union[int, float]] = None,
-        y_offset: Optional[Union[int, float]] = None,
+        width: int | float | None = None,
+        height: int | float | None = None,
+        gravity_type: str | None = None,
+        x_offset: int | float | None = None,
+        y_offset: int | float | None = None,
     ) -> "Image":
         """
         Defines an area of the image to be processed (crop before resize).
@@ -282,10 +282,10 @@ class Image:
 
     def trim(
         self,
-        threshold: Optional[Union[int, float]] = None,
-        color: Optional[str] = None,
-        equal_hor: Optional[bool] = None,
-        equal_ver: Optional[bool] = None,
+        threshold: int | float | None = None,
+        color: str | None = None,
+        equal_hor: bool | None = None,
+        equal_ver: bool | None = None,
     ) -> "Image":
         """
         Removes surrounding background.
@@ -303,9 +303,9 @@ class Image:
     def padding(
         self,
         top: int,
-        right: Optional[int] = None,
-        bottom: Optional[int] = None,
-        left: Optional[int] = None,
+        right: int | None = None,
+        bottom: int | None = None,
+        left: int | None = None,
     ) -> "Image":
         """
         Defines padding size using CSS-style syntax. All arguments are optional but at least one
@@ -348,10 +348,10 @@ class Image:
     def background(
         self,
         *,
-        red: Optional[int] = None,
-        green: Optional[int] = None,
-        blue: Optional[int] = None,
-        hex_color: Optional[str] = None,
+        red: int | None = None,
+        green: int | None = None,
+        blue: int | None = None,
+        hex_color: str | None = None,
     ) -> "Image":
         """
         When set, imgproxy will fill the resulting image background with the specified color.
@@ -366,7 +366,7 @@ class Image:
 
         return self.add_option("background", red, green, blue)
 
-    def background_alpha(self, alpha: Union[int, float]) -> "Image":
+    def background_alpha(self, alpha: int | float) -> "Image":
         """
         Adds an alpha channel to `background`. The value of `alpha` is a positive floating point
         number between `0` and `1`.
@@ -377,9 +377,9 @@ class Image:
 
     def adjust(
         self,
-        brightness: Optional[int] = None,
-        contrast: Optional[Union[int, float]] = None,
-        saturation: Optional[Union[int, float]] = None,
+        brightness: int | None = None,
+        contrast: int | float | None = None,
+        saturation: int | float | None = None,
     ) -> "Image":
         """
         This is a meta-option that defines the brightness, contrast, and saturation. All arguments
@@ -396,7 +396,7 @@ class Image:
         """
         return self.add_option("brightness", brightness)
 
-    def contrast(self, contrast: Union[int, float]) -> "Image":
+    def contrast(self, contrast: int | float) -> "Image":
         """
         When set, imgproxy will adjust the contrast of the resulting image. `contrast` is a
         positive floating point number, where a value of `1` leaves the contrast unchanged.
@@ -405,7 +405,7 @@ class Image:
         """
         return self.add_option("contrast", contrast)
 
-    def saturation(self, saturation: Union[int, float]) -> "Image":
+    def saturation(self, saturation: int | float) -> "Image":
         """
         When set, imgproxy will adjust saturation of the resulting image. `saturation` is a
         positive floating-point number, where a value of `1` leaves the saturation unchanged.
@@ -414,7 +414,7 @@ class Image:
         """
         return self.add_option("saturation", saturation)
 
-    def blur(self, sigma: Union[int, float]) -> "Image":
+    def blur(self, sigma: int | float) -> "Image":
         """
         When set, imgproxy will apply a gaussian blur filter to the resulting image. The value of
         `sigma` defines the size of the mask imgproxy will use.
@@ -423,7 +423,7 @@ class Image:
         """
         return self.add_option("blur", sigma)
 
-    def sharpen(self, sigma: Union[int, float]) -> "Image":
+    def sharpen(self, sigma: int | float) -> "Image":
         """
         When set, imgproxy will apply the sharpen filter to the resulting image. The value of
         `sigma` defines the size of the mask imgproxy will use.
@@ -446,9 +446,9 @@ class Image:
 
     def unsharp_masking(
         self,
-        mode: Optional[str] = None,
-        weight: Optional[Union[int, float]] = None,
-        divider: Optional[Union[int, float]] = None,
+        mode: str | None = None,
+        weight: int | float | None = None,
+        divider: int | float | None = None,
     ) -> "Image":
         """
         Allows redefining unsharp masking options. All arguments have the same meaning as Unsharp
@@ -456,9 +456,7 @@ class Image:
         """
         return self.add_option("unsharp_masking", mode, weight, divider)
 
-    def blur_detections(
-        self, sigma: Union[int, float], class_names: Optional[list[str]] = None
-    ) -> "Image":
+    def blur_detections(self, sigma: int | float, class_names: list[str] | None = None) -> "Image":
         """
         imgproxy detects objects of the provided classes and blurs them. If class names are
         omitted, imgproxy blurs all the detected objects.
@@ -469,7 +467,7 @@ class Image:
             class_names = []
         return self.add_option("blur_detections", sigma, *class_names)
 
-    def draw_detections(self, draw: bool, class_names: Optional[list[str]] = None) -> "Image":
+    def draw_detections(self, draw: bool, class_names: list[str] | None = None) -> "Image":
         """
         When draw is set to `True`, imgproxy detects objects of the provided classes and draws
         their bounding boxes. If class names are omitted, imgproxy draws the bounding boxes of all
