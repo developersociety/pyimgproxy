@@ -19,7 +19,7 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/developersociety/pyimgproxy"
+Homepage = 'https://github.com/developersociety/pyimgproxy'
 
 [build-system]
 requires = ['setuptools >= 77.0.3']
@@ -36,24 +36,79 @@ line-length = 99
 target-version = 'py310'
 
 [tool.ruff.lint]
-select = [
-    'F',   # pyflakes
-    'E',   # pycodestyle
-    'W',   # pycodestyle
-    'I',   # isort
-    'N',   # pep8-naming
-    'UP',  # pyupgrade
-    'S',   # flake8-bandit
-    'BLE', # flake8-blind-except
-    'C4',  # flake8-comprehensions
-    'EM',  # flake8-errmsg
-    'T20', # flake8-print
-    'RET', # flake8-return
-    'RUF', # ruff
+extend-select = [
+  'ERA',   # eradicate
+  'YTT',   # flake8-2020
+  'ASYNC', # flake8-async
+  'S',     # flake8-bandit
+  'BLE',   # flake8-blind-except
+  'B',     # flake8-bugbear
+  'A',     # flake8-builtins
+  'COM',   # flake8-commas
+  'C4',    # flake8-comprehensions
+  'DTZ',   # flake8-datetimez
+  'T10',   # flake8-debugger
+  'DJ',    # flake8-django
+  'EM',    # flake8-errmsg
+  'EXE',   # flake8-executable
+  'FA',    # flake8-future-annotations
+  'INT',   # flake8-gettext
+  'ISC',   # flake8-implicit-str-concat
+  'ICN',   # flake8-import-conventions
+  'LOG',   # flake8-logging
+  'G',     # flake8-logging-format
+  'INP',   # flake8-no-pep420
+  'PIE',   # flake8-pie
+  'T20',   # flake8-print
+  'PYI',   # flake8-pyi
+  'Q',     # flake8-quotes
+  'RSE',   # flake8-raise
+  'RET',   # flake8-return
+  'SLOT',  # flake8-slots
+  'SIM',   # flake8-simplify
+  'TID',   # flake8-tidy-imports
+  'TD',    # flake8-todos
+  'TCH',   # flake8-type-checking
+  'PTH',   # flake8-use-pathlib
+  'FLY',   # flynt
+  'I',     # isort
+  'NPY',   # numpy-specific rules
+  'PD',    # pandas-vet
+  'N',     # pep8-naming
+  'PERF',  # perflint
+  'E',     # pycodestyle
+  'W',     # pycodestyle
+  'F',     # pyflakes
+  'PGH',   # pygrep-hooks
+  'PLC',   # pylint
+  'PLE',   # pylint
+  'PLW',   # pylint
+  'UP',    # pyupgrade
+  'FURB',  # refurb
+  'RUF',   # ruff-specific rules
+  'TRY',   # tryceratops
 ]
 ignore = [
-    'EM101', # flake8-errmsg: raw-string-in-exception
+  'COM812', # flake8-commas: missing-trailing-comma
+  'EM101',  # flake8-errmsg: raw-string-in-exception
+  'ISC001', # flake8-implicit-str-concat: single-line-implicit-string-concatenation
+  'PYI041', # flake8-pyi: redundant-numeric-union
+  'RUF012', # ruff-specific rules: mutable-class-default
+  'SIM105', # flake8-simplify: suppressible-exception
+  'SIM108', # flake8-simplify: if-else-block-instead-of-if-exp
+  'TD002',  # flake8-todos: missing-todo-author
+  'TRY003', # tryceratops: raise-vanilla-args
 ]
 
 [tool.ruff.lint.isort]
 combine-as-imports = true
+section-order = [
+  'future',
+  'standard-library',
+  'third-party',
+  'first-party',
+  'local-folder',
+]
+
+[tool.ruff.lint.pep8-naming]
+extend-ignore-names = ['assert*']

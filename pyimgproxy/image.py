@@ -713,9 +713,7 @@ class Image:
         """
         Return a boolean if a source URL needs encoding with base64.
         """
-        if self.url_escape_regex.search(self._source_url):
-            return True
-        return False
+        return bool(self.url_escape_regex.search(self._source_url))
 
     @cached_property
     def url(self) -> str:
