@@ -97,6 +97,11 @@ class ImageProcessingTestCase(TestCase):
 
         self.assertEqual(image.options, ["enlarge:True"])
 
+    def test_enlarge_default(self):
+        image = self.image.enlarge()
+
+        self.assertEqual(image.options, ["enlarge:True"])
+
     def test_extend(self):
         image = self.image.extend(
             extend=True,
@@ -247,8 +252,18 @@ class ImageProcessingTestCase(TestCase):
 
         self.assertEqual(image.options, ["strip_metadata:True"])
 
+    def test_strip_metadata_default(self):
+        image = self.image.strip_metadata()
+
+        self.assertEqual(image.options, ["strip_metadata:True"])
+
     def test_keep_copyright(self):
         image = self.image.keep_copyright(keep_copyright=True)
+
+        self.assertEqual(image.options, ["keep_copyright:True"])
+
+    def test_keep_copyright_default(self):
+        image = self.image.keep_copyright()
 
         self.assertEqual(image.options, ["keep_copyright:True"])
 
@@ -257,8 +272,18 @@ class ImageProcessingTestCase(TestCase):
 
         self.assertEqual(image.options, ["strip_color_profile:True"])
 
+    def test_strip_color_profile_default(self):
+        image = self.image.strip_color_profile()
+
+        self.assertEqual(image.options, ["strip_color_profile:True"])
+
     def test_enforce_thumbnail(self):
         image = self.image.enforce_thumbnail(enforce_thumbnail=True)
+
+        self.assertEqual(image.options, ["enforce_thumbnail:True"])
+
+    def test_enforce_thumbnail_default(self):
+        image = self.image.enforce_thumbnail()
 
         self.assertEqual(image.options, ["enforce_thumbnail:True"])
 

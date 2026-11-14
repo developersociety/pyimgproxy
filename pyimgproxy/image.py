@@ -189,7 +189,7 @@ class Image:
         """
         return self.add_option("dpr", dpr)
 
-    def enlarge(self, enlarge: bool = False) -> "Image":
+    def enlarge(self, enlarge: bool = True) -> "Image":
         """
         When set to `True`, imgproxy will enlarge the image if it is smaller than the given size.
 
@@ -522,7 +522,7 @@ class Image:
     def style(self) -> "Image":
         raise NotImplementedError
 
-    def strip_metadata(self, strip_metadata: bool = False) -> "Image":
+    def strip_metadata(self, strip_metadata: bool = True) -> "Image":
         """
         When set to `True`, imgproxy will strip the metadata (EXIF, IPTC, etc.) on JPEG and WebP
         output images. This is normally controlled by the `IMGPROXY_STRIP_METADATA` configuration
@@ -530,7 +530,7 @@ class Image:
         """
         return self.add_option("strip_metadata", strip_metadata)
 
-    def keep_copyright(self, keep_copyright: bool = False) -> "Image":
+    def keep_copyright(self, keep_copyright: bool = True) -> "Image":
         """
         When set to `True`, imgproxy will not remove copyright info while stripping metadata. This
         is normally controlled by the `IMGPROXY_KEEP_COPYRIGHT` configuration but this processing
@@ -541,7 +541,7 @@ class Image:
     def dpi(self) -> "Image":
         raise NotImplementedError
 
-    def strip_color_profile(self, strip_color_profile: bool = False) -> "Image":
+    def strip_color_profile(self, strip_color_profile: bool = True) -> "Image":
         """
         When set to `True`, imgproxy will transform the embedded color profile (ICC) to sRGB and
         remove it from the image. Otherwise, imgproxy will try to keep it as is. This is normally
@@ -550,7 +550,7 @@ class Image:
         """
         return self.add_option("strip_color_profile", strip_color_profile)
 
-    def enforce_thumbnail(self, enforce_thumbnail: bool = False) -> "Image":
+    def enforce_thumbnail(self, enforce_thumbnail: bool = True) -> "Image":
         """
         When set to `True` and the source image has an embedded thumbnail, imgproxy will always
         use the embedded thumbnail instead of the main image. Currently, only thumbnails embedded
