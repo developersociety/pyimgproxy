@@ -348,6 +348,9 @@ class Image:
         return self.add_option("rotate", angle)
 
     @overload
+    def background(self) -> "Image": ...
+
+    @overload
     def background(self, *, hex_color: str) -> "Image": ...
 
     @overload
@@ -366,6 +369,8 @@ class Image:
         `red`, `green`, and `blue` are the channel values of the background color (0-255).
         `hex_color` is a hex-coded value of the color. Useful when you convert an image with
         alpha-channel to JPEG.
+
+        With no arguments provided, disables any background manipulations.
 
         Default: disabled
         """

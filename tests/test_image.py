@@ -182,6 +182,11 @@ class ImageProcessingTestCase(TestCase):
 
         self.assertEqual(image.options, ["background:50:150:250"])
 
+    def test_background_disabled(self):
+        image = self.image.background()
+
+        self.assertEqual(image.options, ["background"])
+
     def test_background_alpha(self):
         image = self.image.background_alpha(alpha=0.1)
 
