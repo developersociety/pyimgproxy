@@ -4,14 +4,13 @@ version = '0.4'
 description = 'Python client for imgproxy'
 readme = 'README.md'
 maintainers = [{ name = 'The Developer Society', email = 'studio@dev.ngo' }]
-requires-python = '>= 3.10'
+requires-python = '>= 3.11'
 license = 'BSD-3-Clause'
 classifiers = [
   'Intended Audience :: Developers',
   'Operating System :: OS Independent',
   'Programming Language :: Python',
   'Programming Language :: Python :: 3',
-  'Programming Language :: Python :: 3.10',
   'Programming Language :: Python :: 3.11',
   'Programming Language :: Python :: 3.12',
   'Programming Language :: Python :: 3.13',
@@ -33,7 +32,7 @@ include = ['pyimgproxy*']
 
 [tool.ruff]
 line-length = 99
-target-version = 'py310'
+target-version = 'py311'
 
 [tool.ruff.lint]
 extend-select = [
