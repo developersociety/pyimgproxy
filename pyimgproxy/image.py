@@ -111,6 +111,8 @@ class Image:
 
     def resizing_algorithm(self, resizing_algorithm: str) -> "Image":
         """
+        This option is only available in imgproxy Pro.
+
         Defines the algorithm that imgproxy will use for resizing. Supported algorithms are
         `nearest`, `linear`, `cubic`, `lanczos2`, and `lanczos3`.
 
@@ -368,6 +370,8 @@ class Image:
 
     def background_alpha(self, alpha: int | float) -> "Image":
         """
+        This option is only available in imgproxy Pro.
+
         Adds an alpha channel to `background`. The value of `alpha` is a positive floating point
         number between `0` and `1`.
 
@@ -382,6 +386,8 @@ class Image:
         saturation: int | float | None = None,
     ) -> "Image":
         """
+        This option is only available in imgproxy Pro.
+
         This is a meta-option that defines the brightness, contrast, and saturation. All arguments
         are optional and can be omitted to use their default values.
         """
@@ -389,6 +395,8 @@ class Image:
 
     def brightness(self, brightness: int) -> "Image":
         """
+        This option is only available in imgproxy Pro.
+
         When set, imgproxy will adjust brightness of the resulting image. `brightness` is an
         integer number ranging from `-255` to `255`.
 
@@ -398,6 +406,8 @@ class Image:
 
     def contrast(self, contrast: int | float) -> "Image":
         """
+        This option is only available in imgproxy Pro.
+
         When set, imgproxy will adjust the contrast of the resulting image. `contrast` is a
         positive floating point number, where a value of `1` leaves the contrast unchanged.
 
@@ -407,6 +417,8 @@ class Image:
 
     def saturation(self, saturation: int | float) -> "Image":
         """
+        This option is only available in imgproxy Pro.
+
         When set, imgproxy will adjust saturation of the resulting image. `saturation` is a
         positive floating-point number, where a value of `1` leaves the saturation unchanged.
 
@@ -451,6 +463,8 @@ class Image:
         divider: int | float | None = None,
     ) -> "Image":
         """
+        This option is only available in imgproxy Pro.
+
         Allows redefining unsharp masking options. All arguments have the same meaning as Unsharp
         masking configs. All arguments are optional and can be omitted.
         """
@@ -458,6 +472,8 @@ class Image:
 
     def blur_detections(self, sigma: int | float, class_names: list[str] | None = None) -> "Image":
         """
+        This option is only available in imgproxy Pro.
+
         imgproxy detects objects of the provided classes and blurs them. If class names are
         omitted, imgproxy blurs all the detected objects.
 
@@ -469,6 +485,8 @@ class Image:
 
     def draw_detections(self, draw: bool, class_names: list[str] | None = None) -> "Image":
         """
+        This option is only available in imgproxy Pro.
+
         When draw is set to `True`, imgproxy detects objects of the provided classes and draws
         their bounding boxes. If class names are omitted, imgproxy draws the bounding boxes of all
         the detected objects.
@@ -573,6 +591,8 @@ class Image:
 
     def page(self, page: int) -> "Image":
         """
+        This option is only available in imgproxy Pro.
+
         When a source image supports pagination (PDF, TIFF) or animation (GIF, WebP), this option
         allows specifying the page to use. Page numeration starts from zero.
 
@@ -586,6 +606,8 @@ class Image:
 
     def pages(self, pages: int) -> "Image":
         """
+        This option is only available in imgproxy Pro.
+
         When a source image supports pagination (PDF, TIFF) or animation (GIF, WebP), this option
         allows specifying the number of pages to use. The pages will be stacked vertically and
         left-aligned.
@@ -600,6 +622,8 @@ class Image:
 
     def disable_animation(self, disable: bool) -> "Image":
         """
+        This option is only available in imgproxy Pro.
+
         When set to `True`, imgproxy will treat all images as not animated. Use the `page` and the
         `pages` options to specify which frames imgproxy should use.
 
