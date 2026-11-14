@@ -294,6 +294,10 @@ class Image:
         """
         Removes surrounding background.
 
+        Trimming requires an image to be fully loaded into memory. This disables scale-on-load and
+        significantly increases memory usage and processing time. Use it carefully with large
+        images.
+
         - `threshold` - color similarity tolerance.
         - `color` - (optional) a hex-coded value of the color that needs to be cut off.
         - `equal_hor` - (optional) set to `True`, imgproxy will cut only equal parts from left and
