@@ -207,8 +207,9 @@ class Image:
         """
         - When extend is set to `True`, imgproxy will extend the image if it is smaller than the
           given size.
-        - `gravity_type` (optional) accepts the same values as the gravity option, except `sm`.
-          When `gravity` is not set, imgproxy will use `ce` gravity without offsets.
+        - `gravity_type` (optional) accepts the same values as the gravity option, except `sm`,
+          `obj` and `objw`. When `gravity_type` is not set, imgproxy will use `ce` gravity without
+          offsets.
 
         Default: `false:ce:0:0`
         """
@@ -224,8 +225,9 @@ class Image:
         """
         - When extend is set to `True`, imgproxy will extend the image to the requested aspect
           ratio.
-        - `gravity_type` (optional) accepts the same values as the gravity option, except `sm`.
-          When `gravity_type` is not set, imgproxy will use `ce` gravity without offsets.
+        - `gravity_type` (optional) accepts the same values as the gravity option, except `sm`,
+          `obj` and `objw`. When `gravity_type` is not set, imgproxy will use `ce` gravity without
+          offsets.
 
         Default: `false:ce:0:0`
         """
